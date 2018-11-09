@@ -1,4 +1,6 @@
-theme: jekyll-theme-minimal
 title: SPbU.ml
+# logo: /assets/img/logo.png
 description: This is the site dedicated to SPbU as alternative to others.
 show_downloads: false
+google_analytics:
+theme: jekyll-theme-minimal

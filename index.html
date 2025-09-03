@@ -66,9 +66,9 @@
 
   <script>
     (function(){
-      // Simple i18n: auto‑detect language; Russian for ru/uk/be, English otherwise.
+      // Simple i18n: auto‑detect language; Russian for ru, English otherwise.
       var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-      var isRu = /^ru|^uk|^be/.test(lang);
+      var isRu = /^ru/.test(lang);
       var dict = {
         en: {
           title: 'Slow Processing But Useful (spbu.eu)',
@@ -96,4 +96,3 @@
   </script>
 </body>
 </html>
-

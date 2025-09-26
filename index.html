@@ -9,12 +9,12 @@
 
   <style>
     :root{
-      --bg: #FAF7F5;        /* page background */
-      --paper: #FFFFFF;      /* surfaces */
-      --ink: #2E2826;        /* main text */
-      --muted:#5A3D36;       /* headings & footer text */
-      --line:#D0B8AD;        /* borders */
-      --bar:#E7D6CE;         /* header/footer background */
+      --bg: #FAF7F5;
+      --paper: #FFFFFF;
+      --ink: #2E2826;
+      --muted:#5A3D36;
+      --line:#D0B8AD;
+      --bar:#E7D6CE;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -31,7 +31,6 @@
     header, footer {
       background: var(--bar);
       padding: 1rem;
-      text-align: center;
       border-bottom: 1px solid var(--line);
     }
     footer {
@@ -39,6 +38,24 @@
       border-bottom: none;
       font-size: .95rem;
       color: var(--muted);
+      text-align: center;
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .header-logo {
+      flex: 0 0 auto;
+    }
+
+    .header-logo img {
+      height: 48px;
+      width: auto;
+      display: block;
     }
 
     header h1 {
@@ -46,6 +63,7 @@
       font-size: 1.8rem;
       color: var(--muted);
       font-weight: 700;
+      text-align: center;
     }
 
     main {
@@ -64,6 +82,17 @@
       margin: 1.25rem auto 0;
     }
 
+    /* Адаптив для телефонов */
+    @media (max-width: 600px) {
+      .header-container {
+        flex-direction: column;
+      }
+      .header-logo img {
+        margin-bottom: 0.5rem;
+        height: 40px; /* чуть меньше для мобильных */
+      }
+    }
+
     @media (prefers-color-scheme: dark) {
       :root {
         --bg: #151313;
@@ -78,7 +107,12 @@
 </head>
 <body>
   <header>
-    <h1>Slow Processing But Useful (spbu.eu)</h1>
+    <div class="header-container">
+      <div class="header-logo">
+        <img src="spbueu_logo.png" alt="">
+      </div>
+      <h1>Slow Processing But Useful (spbu.eu)</h1>
+    </div>
   </header>
 
   <main>

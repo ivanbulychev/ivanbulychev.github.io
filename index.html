@@ -56,7 +56,13 @@
 
   <main>
     <h2 data-i18n="welcome">Welcome</h2>
-    <p data-i18n="lead">Welcome to the Slow Processing But Useful space. We will provide various interesting and useful tools soon.</p>
+    <p data-i18n="lead">
+      Welcome to the Slow Processing But Useful space. We will provide various interesting and useful tools soon.
+    </p>
+    <p data-i18n="telegram">
+      2025-09-26 You can now subscribe to our Telegram channel, where we will share news and provide support for the services we launch: 
+      <a href="https://t.me/spbueu" target="_blank" rel="noopener">@spbueu</a>.
+    </p>
     <div class="rule" aria-hidden="true"></div>
   </main>
 
@@ -66,7 +72,7 @@
 
   <script>
     (function(){
-      // Simple i18n: auto‑detect language; Russian for ru, English otherwise.
+      // Simple i18n: auto-detect language; Russian for ru, English otherwise.
       var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
       var isRu = /^ru/.test(lang);
       var dict = {
@@ -74,12 +80,14 @@
           title: 'Slow Processing But Useful (spbu.eu)',
           welcome: 'Welcome',
           lead: 'Welcome to the Slow Processing But Useful space. We will provide various interesting and useful tools soon.',
+          telegram: '2025-09-26 You can now subscribe to our Telegram channel, where we will share news and provide support for the services we launch: @spbueu',
           footer: '© 2025, Non-profit project based in EU'
         },
         ru: {
           title: 'Slow Processing But Useful (spbu.eu)',
           welcome: 'Добро пожаловать',
           lead: 'Добро пожаловать в пространство Slow Processing But Useful. Скоро мы предоставим различные интересные и полезные инструменты.',
+          telegram: '2025-09-26 Теперь вы можете подписаться на наш канал в Telegram, где мы будем публиковать новости и оказывать поддержку запущенным сервисам: @spbueu',
           footer: '© 2025, Некоммерческий проект, базируется в ЕС'
         }
       };

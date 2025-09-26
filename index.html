@@ -8,13 +8,13 @@
   <meta name="theme-color" content="#E7D6CE" />
 
   <style>
-    :root{
+    :root {
       --bg: #FAF7F5;
       --paper: #FFFFFF;
       --ink: #2E2826;
-      --muted:#5A3D36;
-      --line:#D0B8AD;
-      --bar:#E7D6CE;
+      --muted: #5A3D36;
+      --line: #D0B8AD;
+      --bar: #E7D6CE;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -41,29 +41,35 @@
       text-align: center;
     }
 
+    /* Контейнер шапки */
     .header-container {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
+      position: relative; /* для абсолютного позиционирования логотипа */
     }
 
+    /* Логотип слева */
     .header-logo {
-      flex: 0 0 auto;
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
     }
-
     .header-logo img {
       height: 48px;
       width: auto;
       display: block;
     }
 
+    /* Заголовок по центру */
     header h1 {
       margin: 0;
       font-size: 1.8rem;
       color: var(--muted);
       font-weight: 700;
       text-align: center;
+      flex: 1;
     }
 
     main {
@@ -86,10 +92,15 @@
     @media (max-width: 600px) {
       .header-container {
         flex-direction: column;
+        position: static; /* убираем absolute */
+      }
+      .header-logo {
+        position: static;
+        transform: none;
+        margin-bottom: 0.5rem;
       }
       .header-logo img {
-        margin-bottom: 0.5rem;
-        height: 40px; /* чуть меньше для мобильных */
+        height: 40px;
       }
     }
 
@@ -109,7 +120,7 @@
   <header>
     <div class="header-container">
       <div class="header-logo">
-        <img src="spbueu_logo.png" alt="">
+        <img src="spbueu_logo.png" alt="spbu.eu logo">
       </div>
       <h1>Slow Processing But Useful (spbu.eu)</h1>
     </div>

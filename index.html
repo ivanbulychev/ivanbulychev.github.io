@@ -17,90 +17,84 @@
       --bar:#E7D6CE;         /* header/footer background */
     }
 
-    *, *::before, *::after{ box-sizing:border-box; }
-    html, body{ height:100%; }
-    body{
-      margin:0;
-      font-family: ui-serif, Georgia, "Times New Roman", Times, serif; /* no external fonts */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
       background: var(--bg);
       color: var(--ink);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    header, footer{
+    header, footer {
       background: var(--bar);
       padding: 1rem;
       text-align: center;
       border-bottom: 1px solid var(--line);
     }
-    footer{ border-top:1px solid var(--line); border-bottom:none; font-size:.95rem; color:var(--muted); }
+    footer {
+      border-top: 1px solid var(--line);
+      border-bottom: none;
+      font-size: .95rem;
+      color: var(--muted);
+    }
 
-    header h1{ margin:0; font-size:1.8rem; color: var(--muted); font-weight:700; }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
 
-    main{ max-width: 820px; margin: 3rem auto; padding: 0 1rem; text-align:center; }
-    h2{ font-size:1.5rem; color:#7B5347; margin:0; }
-    p{ margin-top:1rem; font-size:1.1rem; }
+    main {
+      max-width: 820px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      text-align: center;
+    }
+    h2 { font-size: 1.5rem; color: #7B5347; margin: 0; }
+    p  { margin-top: 1rem; font-size: 1.1rem; }
 
-    .rule{ height:1px; background: linear-gradient(90deg, transparent, var(--line), transparent); width:min(560px, 70%); margin:1.25rem auto 0; }
+    .rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
+      width: min(560px, 70%);
+      margin: 1.25rem auto 0;
+    }
 
-    @media (prefers-color-scheme: dark){
-      :root{ --bg:#151313; --paper:#1B1817; --ink:#F2ECE9; --muted:#E6D5CD; --line:#3B312E; --bar:#2A2220; }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #151313;
+        --paper: #1B1817;
+        --ink: #F2ECE9;
+        --muted: #E6D5CD;
+        --line: #3B312E;
+        --bar: #2A2220;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1 data-i18n="title">Slow Processing But Useful (spbu.eu)</h1>
+    <h1>Slow Processing But Useful (spbu.eu)</h1>
   </header>
 
   <main>
-    <h2 data-i18n="welcome">Welcome</h2>
-    <p data-i18n="lead">
+    <h2>Welcome</h2>
+    <p>
       Welcome to the Slow Processing But Useful space. We will provide various interesting and useful tools soon.
     </p>
-    <p data-i18n="telegram">
-      2025-09-26 You can now subscribe to our Telegram channel, where we will share news and provide support for the services we launch: 
+    <p>
+      You can now subscribe to our Telegram channel, where we will share news and provide support for the services we launch:
       <a href="https://t.me/spbueu" target="_blank" rel="noopener">@spbueu</a>.
     </p>
     <div class="rule" aria-hidden="true"></div>
   </main>
 
   <footer>
-    <span data-i18n="footer">© 2025, Non-profit project based in EU</span>
+    <span>© 2025, Non-profit project based in EU</span>
   </footer>
-
-  <script>
-    (function(){
-      // Simple i18n: auto-detect language; Russian for ru, English otherwise.
-      var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-      var isRu = /^ru/.test(lang);
-      var dict = {
-        en: {
-          title: 'Slow Processing But Useful (spbu.eu)',
-          welcome: 'Welcome',
-          lead: 'Welcome to the Slow Processing But Useful space. We will provide various interesting and useful tools soon.',
-          telegram: '2025-09-26 You can now subscribe to our Telegram channel, where we will share news and provide support for the services we launch: @spbueu',
-          footer: '© 2025, Non-profit project based in EU'
-        },
-        ru: {
-          title: 'Slow Processing But Useful (spbu.eu)',
-          welcome: 'Добро пожаловать',
-          lead: 'Добро пожаловать в пространство Slow Processing But Useful. Скоро мы предоставим различные интересные и полезные инструменты.',
-          telegram: '2025-09-26 Теперь вы можете подписаться на наш канал в Telegram, где мы будем публиковать новости и оказывать поддержку запущенным сервисам: @spbueu',
-          footer: '© 2025, Некоммерческий проект, базируется в ЕС'
-        }
-      };
-      var chosen = isRu ? dict.ru : dict.en;
-      try{
-        document.documentElement.setAttribute('lang', isRu ? 'ru' : 'en');
-        var nodes = document.querySelectorAll('[data-i18n]');
-        nodes.forEach(function(el){
-          var key = el.getAttribute('data-i18n');
-          if (chosen[key]) el.textContent = chosen[key];
-        });
-      }catch(e){ /* silent */ }
-    })();
-  </script>
 </body>
 </html>

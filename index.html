@@ -262,15 +262,15 @@ You can subscribe to our Telegram channel, where we will share news and provide 
 
 <!-- News block from Telegram -->
 <section class="news-section">
-<div class="news-header">
-<h2>Latest News</h2>
-<div class="news-controls">
-<button class="btn-refresh" onclick="loadRSS()">🔄 Refresh News</button>
-</div>
-</div>
-<div class="news-feed">
-<div id="feed"></div>
-</div>
+    <div class="news-header">
+        <h2>Latest News</h2>
+        <div class="news-controls">
+            <button class="btn-refresh" onclick="loadNewsFeed()">🔄 Refresh News</button>
+        </div>
+    </div>
+    <div class="news-feed">
+        <div id="feed-container"></div>
+    </div>
 </section>
 
 <footer>
@@ -278,67 +278,91 @@ You can subscribe to our Telegram channel, where we will share news and provide 
 </footer>
 
 <script>
-// JSON feed for @spbueu channel via CORS proxy
-const RSS_BRIDGE_URL = "https://rssbridge.boldair.dev/?action=display&bridge=TelegramBridge&username=%40spbueu&format=Json";
-const CORS_PROXY = "https://api.allorigins.win/get?url=";
-const FEED_URL = CORS_PROXY + encodeURIComponent(RSS_BRIDGE_URL);
+    // Configuration Constants
+    // RSS-Bridge URL for @spbueu channel, configured for JSON output
+    const RSS_BRIDGE_URL = "https://rssbridge.boldair.dev/?action=display&bridge=TelegramBridge&username=%40spbueu&format=Json";
+    // CORS Proxy is necessary as the Bridge does not have cross-origin headers
+    const CORS_PROXY = "https://api.allorigins.win/get?url=";
+    // Final URL to fetch the JSON data
+    const FEED_URL = CORS_PROXY + encodeURIComponent(RSS_BRIDGE_URL);
 
-async function loadRSS() {
-  const feedElement = document.getElementById('feed');
-  feedElement.innerHTML = '<div class="loading">Loading news...</div>';
-  try {
-    const res = await fetch(FEED_URL, { mode: 'cors' });
-    if (!res.ok) throw new Error("Error loading feed (HTTP " + res.status + ")");
-    
-    let data;
-    const proxyData = await res.json();
-    try {
-      data = JSON.parse(proxyData.contents);
-    } catch (e) {
-      data = proxyData;
-    }
-    
-    const items = data.items || [];
-    feedElement.innerHTML = "";
-    
-    if (items.length === 0) {
-      feedElement.innerHTML = '<div class="error">No news available.</div>';
-      return;
-    }
-    
-    items.slice(0, 20).forEach(item => {
-      const title = item.title || "No title";
-      const link = item.url || "#";
-      const contentHtml = item.content_html || item.content || item.description || "";
-      const date = item.date_modified ? new Date(item.date_modified).toLocaleString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      }) : "";
-      
-      // Strip HTML tags, keep only text
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = contentHtml;
-      const plainText = tempDiv.textContent || tempDiv.innerText || "";
-      
-      const html = `
-        <div class="rss-item">
-          <a class="rss-title" href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
-          ${date ? `<span class="rss-date">${date}</span>` : ''}
-          ${plainText ? `<div class="rss-content">${plainText.trim()}</div>` : ''}
-        </div>
-      `;
-      feedElement.innerHTML += html;
-    });
-  } catch (err) {
-    feedElement.innerHTML = `<div class="error">⚠️ Failed to load news: ${err.message}</div>`;
-  }
-}
+    // Maximum number of items to display
+    const MAX_ITEMS = 20;
 
-// Load on page open
-loadRSS();
+    /**
+     * Fetches the news feed from the RSS-Bridge via CORS proxy and renders it.
+     */
+    async function loadNewsFeed() {
+        const feedContainer = document.getElementById('feed-container');
+        feedContainer.innerHTML = '<div class="loading">Loading news...</div>'; // Loading indicator
+
+        try {
+            // 1. Fetch data from the CORS proxy
+            const res = await fetch(FEED_URL);
+            if (!res.ok) {
+                throw new Error("HTTP " + res.status);
+            }
+
+            // 2. Parse the proxy response to get the JSON string
+            const proxyResponse = await res.json();
+            const { contents } = proxyResponse;
+
+            // 3. Parse the actual JSON content from RSS-Bridge
+            const data = JSON.parse(contents);
+
+            const items = data.items || [];
+            feedContainer.innerHTML = ""; // Clear the loading indicator
+
+            if (items.length === 0) {
+                feedContainer.innerHTML = '<div class="error">No news available.</div>';
+                return;
+            }
+
+            // Iterate over items and build the HTML output
+            items.slice(0, MAX_ITEMS).forEach(item => {
+                const title = item.title || "No Title";
+                const link = item.url || "#";
+                // Prioritize content_html as it often contains rich media/text
+                const contentHtml = item.content_html || item.content || item.description || "";
+                
+                // Use date_modified or date_published for timestamp
+                const dateSource = item.date_modified || item.date_published;
+                
+                // Format the date for English localization
+                const dateOptions = {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false // Use 24-hour format
+                };
+                const date = dateSource 
+                    ? new Date(dateSource).toLocaleString('en-US', dateOptions) 
+                    : "";
+
+                // Strip HTML tags from content to display as plain text summary
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = contentHtml;
+                const plainText = tempDiv.textContent || tempDiv.innerText || "";
+                
+                const html = `
+                    <div class="rss-item">
+                        <a class="rss-title" href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
+                        ${date ? `<span class="rss-date">${date}</span>` : ''}
+                        ${plainText ? `<div class="rss-content">${plainText.trim()}</div>` : ''}
+                    </div>
+                `;
+                feedContainer.innerHTML += html;
+            });
+
+        } catch (err) {
+            feedContainer.innerHTML = `<div class="error">⚠️ Failed to load news. Check feed URL or proxy status. Error: ${err.message}</div>`;
+        }
+    }
+
+    // Load the feed when the page initializes
+    loadNewsFeed();
 </script>
 
 </body>

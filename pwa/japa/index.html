@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Japa Counter</title>
+
+    <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="./style.css">
+
+    <meta name="theme-color" content="#2b2b2b">
+</head>
+
+<body>
+
+    <header>
+        <h1>Japa Counter</h1>
+    </header>
+
+    <main>
+
+        <section class="card">
+            <label>
+                Кругов:
+                <select id="rounds">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="4">4</option>
+                    <option value="8">8</option>
+                    <option value="16">16</option>
+                </select>
+            </label>
+
+            <p>Текущий круг: <strong id="current-round">1</strong></p>
+            <p>Мантра: <strong id="current-count">0</strong> / 108</p>
+        </section>
+
+        <section class="card">
+            <button id="plus">+1 мантра</button>
+            <button id="reset">Сброс</button>
+        </section>
+
+    </main>
+
+    <script src="./app.js"></script>
+
+</body>
+
+</html>

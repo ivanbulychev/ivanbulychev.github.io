@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <title>Japa Counter</title>
-
   <link rel="manifest" href="./manifest.json">
   <link rel="stylesheet" href="./style.css">
-
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
   <meta name="theme-color" content="#2b2b2b">
 </head>
 
 <body>
 
-<header>
-  <h1>Japa Counter</h1>
-</header>
+  <header>
+    <h1>Japa<br>Counter</h1>
+  </header>
 
-<main>
+  <main>
 
-<section class="card">
-  <label>
-    Кругов:
-    <select id="rounds">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="4">4</option>
-      <option value="8">8</option>
-      <option value="16">16</option>
-    </select>
-  </label>
+    <section class="card">
+      <label>
+        Кругов:
+        <select id="rounds">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="4">4</option>
+          <option value="8">8</option>
+          <option value="16">16</option>
+        </select>
+      </label>
 
-  <p>Текущий круг: <strong id="current-round">1</strong></p>
-  <p>Мантра: <strong id="current-count">0</strong> / 108</p>
-</section>
+      <p>Текущий круг: <strong id="current-round">1</strong></p>
+      <p>Мантра: <strong id="current-count">0</strong> / 108</p>
+    </section>
 
-<section class="card">
-  <button id="plus">+1 мантра</button>
-  <button id="reset">Сброс</button>
-</section>
+    <section class="card">
+      <button id="plus">+1 мантра</button>
+      <button id="reset">Сброс</button>
+    </section>
 
-</main>
+  </main>
 
-<footer id="update-footer">
-  <!-- Здесь будет появляться ссылка для обновления -->
-</footer>
+  <footer id="update-footer">
+    <!-- Здесь будет появляться ссылка для обновления -->
+  </footer>
 
-<script src="./app.js"></script>
+  <script src="./app.js"></script>
 
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-const CACHE = "japa-v2";
+const CACHE = "japa-v3";
 
 self.addEventListener("install", e => {
   e.waitUntil(

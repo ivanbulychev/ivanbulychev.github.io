@@ -1,369 +1,611 @@
+
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Slow Processing But Useful — spbu.eu</title>
-<meta name="description" content="Welcome to the Slow Processing But Useful space. Free tools for humans." />
-<meta name="theme-color" content="#E7D6CE" />
-<style>
-:root {
---bg: #FAF7F5;
---paper: #FFFFFF;
---ink: #2E2826;
---muted: #5A3D36;
---line: #D0B8AD;
---bar: #E7D6CE;
-}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Slow Processing But Useful — spbu.eu</title>
+    <meta name="description" content="Welcome to the Slow Processing But Useful space. Free tools for humans." />
+    <meta name="theme-color" content="#E7D6CE" />
 
-*, *::before, *::after { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
-margin: 0;
-font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
-background: var(--bg);
-color: var(--ink);
-line-height: 1.6;
--webkit-font-smoothing: antialiased;
-}
+    <style>
+        :root {
+            --bg: #FAF7F5;
+            --paper: #FFFFFF;
+            --ink: #2E2826;
+            --muted: #5A3D36;
+            --line: #D0B8AD;
+            --bar: #E7D6CE;
+        }
 
-header, footer {
-background: var(--bar);
-padding: 1rem;
-border-bottom: 1px solid var(--line);
-}
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
 
-footer {
-border-top: 1px solid var(--line);
-border-bottom: none;
-font-size: .95rem;
-color: var(--muted);
-text-align: center;
-}
+        html, body {
+            height: 100%;
+        }
 
-/* Header container */
-.header-container {
-display: flex;
-align-items: center;
-justify-content: center;
-position: relative;
-}
+        body {
+            margin: 0;
+            font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
-/* Logo on the left */
-.header-logo {
-position: absolute;
-left: 1rem;
-top: 50%;
-transform: translateY(-50%);
-}
+        header, footer {
+            background: var(--bar);
+            padding: 1rem;
+            border-bottom: 1px solid var(--line);
+        }
 
-.header-logo img {
-height: 48px;
-width: auto;
-max-height: 64px;
-max-width: 64px;
-display: block;
-}
+        footer {
+            border-top: 1px solid var(--line);
+            border-bottom: none;
+            font-size: .95rem;
+            color: var(--muted);
+            text-align: center;
+        }
 
-/* Title centered */
-header h1 {
-margin: 0;
-font-size: 1.8rem;
-color: var(--muted);
-font-weight: 700;
-text-align: center;
-flex: 1;
-}
+        /* Header container */
 
-main {
-max-width: 820px;
-margin: 3rem auto;
-padding: 0 1rem;
-text-align: center;
-}
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
 
-h2 { font-size: 1.5rem; color: #7B5347; margin: 0; }
-p { margin-top: 1rem; font-size: 1.1rem; }
-.rule {
-height: 1px;
-background: linear-gradient(90deg, transparent, var(--line), transparent);
-width: min(560px, 70%);
-margin: 1.25rem auto 0;
-}
+        /* Logo on the left */
 
-/* Styles for news block */
-.news-section {
-max-width: 820px;
-margin: 2rem auto 3rem;
-padding: 0 1rem;
-}
+        .header-logo {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
-.news-header {
-text-align: center;
-margin-bottom: 1.5rem;
-}
+        .header-logo img {
+            height: 48px;
+            width: auto;
+            max-height: 64px;
+            max-width: 64px;
+            display: block;
+        }
 
-.news-header h2 {
-font-size: 1.5rem;
-color: #7B5347;
-margin: 0 0 0.5rem 0;
-}
+        /* Title centered */
 
-.news-controls {
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 1rem;
-margin-top: 1rem;
-}
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--muted);
+            font-weight: 700;
+            text-align: center;
+            flex: 1;
+        }
 
-.btn-refresh {
-background: var(--bar);
-color: var(--muted);
-border: 1px solid var(--line);
-font-family: inherit;
-font-size: 0.95rem;
-padding: 0.5rem 1.2rem;
-border-radius: 4px;
-cursor: pointer;
-transition: all 0.2s;
-}
+        main {
+            max-width: 820px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
 
-.btn-refresh:hover {
-background: var(--line);
-border-color: var(--muted);
-}
+        h2 {
+            font-size: 1.5rem;
+            color: #7B5347;
+            margin: 0;
+        }
 
-.news-feed {
-margin-top: 1.5rem;
-}
+        p {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
 
-.rss-item {
-background: var(--paper);
-border: 1px solid var(--line);
-border-radius: 6px;
-padding: 1.25rem;
-margin-bottom: 1.25rem;
-text-align: left;
-transition: box-shadow 0.2s;
-}
+        .rule {
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--line),
+                transparent
+            );
+            width: min(560px, 70%);
+            margin: 1.25rem auto 0;
+        }
 
-.rss-item:hover {
-box-shadow: 0 2px 8px rgba(46, 40, 38, 0.08);
-}
+        /* News section */
 
-.rss-title {
-color: #7B5347;
-font-size: 1.1rem;
-font-weight: 600;
-text-decoration: none;
-display: block;
-margin-bottom: 0.5rem;
-}
+        .news-section {
+            max-width: 820px;
+            margin: 2rem auto 3rem;
+            padding: 0 1rem;
+        }
 
-.rss-title:hover {
-text-decoration: underline;
-}
+        .news-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
 
-.rss-date {
-display: block;
-color: var(--muted);
-font-size: 0.9rem;
-margin-bottom: 0.75rem;
-font-style: italic;
-}
+        .news-header h2 {
+            font-size: 1.5rem;
+            color: #7B5347;
+            margin: 0 0 0.5rem 0;
+        }
 
-.rss-content {
-color: var(--ink);
-font-size: 1rem;
-line-height: 1.6;
-white-space: pre-wrap;
-word-wrap: break-word;
-}
+        .news-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
 
-.loading, .error {
-text-align: center;
-padding: 1.5rem;
-color: var(--muted);
-font-style: italic;
-}
+        .btn-refresh {
+            background: var(--bar);
+            color: var(--muted);
+            border: 1px solid var(--line);
+            font-family: inherit;
+            font-size: 0.95rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
 
-.error {
-color: #B74A3D;
-background: #FFF0EE;
-border: 1px solid #FFCCC5;
-border-radius: 6px;
-}
+        .btn-refresh:hover:not(:disabled) {
+            background: var(--line);
+            border-color: var(--muted);
+        }
 
-/* Responsive design for mobile */
-@media (max-width: 600px) {
-.header-container {
-flex-direction: column;
-position: static;
-}
+        .btn-refresh:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
 
-.header-logo {
-position: static;
-transform: none;
-margin-bottom: 0.5rem;
-}
+        .news-feed {
+            margin-top: 1.5rem;
+        }
 
-.header-logo img {
-height: 40px;
-max-height: 48px;
-max-width: 48px;
-}
+        .rss-item {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+            text-align: left;
+            transition: box-shadow 0.2s;
+        }
 
-.rss-item {
-padding: 1rem;
-}
-}
+        .rss-item:hover {
+            box-shadow: 0 2px 8px rgba(
+                46, 40, 38, 0.08
+            );
+        }
 
-@media (prefers-color-scheme: dark) {
-:root {
---bg: #151313;
---paper: #1B1817;
---ink: #F2ECE9;
---muted: #E6D5CD;
---line: #3B312E;
---bar: #2A2220;
-}
+        .rss-title {
+            color: #7B5347;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
 
-.error {
-color: #FFB3A8;
-background: #2A1A18;
-border-color: #4A2A28;
-}
-}
-</style>
-</head>
-<body>
+        .rss-title:hover {
+            text-decoration: underline;
+        }
 
-<header>
-<div class="header-container">
-<div class="header-logo">
-<img src="spbueu_logo.png" alt="spbu.eu logo">
-</div>
-<h1>Slow Processing But Useful (spbu.eu)</h1>
-</div>
-</header>
+        .rss-date {
+            display: block;
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+        }
 
-<main>
-<h2>Welcome</h2>
-<p>
-Welcome to the Slow Processing But Useful space. We will provide various interesting and useful tools soon.
-</p>
-<p>
-You can subscribe to our Telegram channel, where we will share news and provide support for the services we launch:
-<a href="https://t.me/spbueu" target="_blank" rel="noopener">@spbueu</a>.
-</p>
-<div class="rule" aria-hidden="true"></div>
-</main>
+        .rss-content {
+            color: var(--ink);
+            font-size: 1rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
 
-<!-- News block from Telegram -->
-<section class="news-section">
-    <div class="news-header">
-        <h2>Latest News</h2>
-        <div class="news-controls">
-            <button class="btn-refresh" onclick="loadNewsFeed()">🔄 Refresh News</button>
-        </div>
-    </div>
-    <div class="news-feed">
-        <div id="feed-container"></div>
-    </div>
-</section>
+        .loading, .error {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--muted);
+            font-style: italic;
+        }
 
-<footer>
-<span>© 2025-2026, Non-profit project based in EU</span>
-</footer>
+        .error {
+            color: #B74A3D;
+            background: #FFF0EE;
+            border: 1px solid #FFCCC5;
+            border-radius: 6px;
+        }
 
-<script>
-    // Configuration Constants
-    // RSS-Bridge URL for @spbueu channel, configured for JSON output
-    const RSS_BRIDGE_URL = "https://rssbridge.boldair.dev/?action=display&bridge=TelegramBridge&username=%40spbueu&format=Json";
-    // CORS Proxy is necessary as the Bridge does not have cross-origin headers
-    const CORS_PROXY = "https://api.allorigins.win/get?url=";
-    // Final URL to fetch the JSON data
-    const FEED_URL = CORS_PROXY + encodeURIComponent(RSS_BRIDGE_URL);
+        .news-status {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-top: 0.75rem;
+        }
 
-    // Maximum number of items to display
-    const MAX_ITEMS = 20;
+        .news-status:empty {
+            display: none;
+        }
 
-    /**
-     * Fetches the news feed from the RSS-Bridge via CORS proxy and renders it.
-     */
-    async function loadNewsFeed() {
-        const feedContainer = document.getElementById('feed-container');
-        feedContainer.innerHTML = '<div class="loading">Loading news...</div>'; // Loading indicator
+        /* Responsive design for mobile */
 
-        try {
-            // 1. Fetch data from the CORS proxy
-            const res = await fetch(FEED_URL);
-            if (!res.ok) {
-                throw new Error("HTTP " + res.status);
+        @media (max-width: 600px) {
+            .header-container {
+                flex-direction: column;
+                position: static;
             }
 
-            // 2. Parse the proxy response to get the JSON string
-            const proxyResponse = await res.json();
-            const { contents } = proxyResponse;
+            .header-logo {
+                position: static;
+                transform: none;
+                margin-bottom: 0.5rem;
+            }
 
-            // 3. Parse the actual JSON content from RSS-Bridge
-            const data = JSON.parse(contents);
+            .header-logo img {
+                height: 40px;
+                max-height: 48px;
+                max-width: 48px;
+            }
 
-            const items = data.items || [];
-            feedContainer.innerHTML = ""; // Clear the loading indicator
+            .rss-item {
+                padding: 1rem;
+            }
+        }
 
-            if (items.length === 0) {
-                feedContainer.innerHTML = '<div class="error">No news available.</div>';
+        /* Dark mode */
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #151313;
+                --paper: #1B1817;
+                --ink: #F2ECE9;
+                --muted: #E6D5CD;
+                --line: #3B312E;
+                --bar: #2A2220;
+            }
+
+            h2,
+            .news-header h2,
+            .rss-title {
+                color: #D0B8AD;
+            }
+
+            main a {
+                color: #D0B8AD;
+            }
+
+            .error {
+                color: #FFB3A8;
+                background: #2A1A18;
+                border-color: #4A2A28;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="header-logo">
+                <img
+                    src="spbueu_logo.png"
+                    alt="spbu.eu logo"
+                >
+            </div>
+
+            <h1>Slow Processing But Useful (spbu.eu)</h1>
+        </div>
+    </header>
+
+    <main>
+        <h2>Welcome</h2>
+
+        <p>
+            Welcome to the Slow Processing But Useful space.
+            We will provide various interesting and useful tools soon.
+        </p>
+
+        <p>
+            You can subscribe to our Telegram channel,
+            where we will share news and provide support
+            for the services we launch:
+            <a
+                href="https://t.me/spbueu"
+                target="_blank"
+                rel="noopener noreferrer"
+            >@spbueu</a>.
+        </p>
+
+        <div class="rule" aria-hidden="true"></div>
+    </main>
+
+    <!-- News block from Telegram -->
+
+    <section class="news-section">
+
+        <div class="news-header">
+            <h2>Latest News</h2>
+
+            <div class="news-controls">
+                <button
+                    id="refresh-button"
+                    class="btn-refresh"
+                    type="button"
+                >
+                    🔄 Refresh News
+                </button>
+            </div>
+
+            <div
+                id="news-status"
+                class="news-status"
+                role="status"
+            ></div>
+        </div>
+
+        <div class="news-feed">
+            <div id="feed-container"></div>
+
+            <noscript>
+                <div class="error">
+                    JavaScript is disabled.
+                    Please visit our
+                    <a href="https://t.me/spbueu">
+                        Telegram channel
+                    </a>
+                    to read the latest news.
+                </div>
+            </noscript>
+        </div>
+
+    </section>
+
+    <footer>
+        <span>
+            © 2025-2026, Non-profit project based in EU
+        </span>
+    </footer>
+
+    <script>
+        // Configuration
+
+        const FEED_URL = "./news.json";
+        const MAX_ITEMS = 20;
+        const CHANNEL_URL = "https://t.me/spbueu";
+
+        const feedContainer =
+            document.getElementById("feed-container");
+
+        const refreshButton =
+            document.getElementById("refresh-button");
+
+        const newsStatus =
+            document.getElementById("news-status");
+
+
+        // Create a status or error message
+
+        function showMessage(message, className) {
+            const element = document.createElement("div");
+
+            element.className = className;
+            element.textContent = message;
+
+            feedContainer.replaceChildren(element);
+        }
+
+
+        // Format publication date
+
+        function formatDate(value) {
+            if (!value) {
+                return "";
+            }
+
+            const date = new Date(value);
+
+            if (Number.isNaN(date.getTime())) {
+                return "";
+            }
+
+            return date.toLocaleString("en-GB", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false
+            });
+        }
+
+
+        // Validate Telegram post links
+
+        function safeTelegramLink(value) {
+            if (
+                typeof value === "string" &&
+                /^https:\/\/t\.me\/spbueu\/\d+$/.test(value)
+            ) {
+                return value;
+            }
+
+            return CHANNEL_URL;
+        }
+
+
+        // Create an individual news card
+
+        function createNewsCard(item) {
+            const card = document.createElement("article");
+
+            card.className = "rss-item";
+
+            const link = document.createElement("a");
+
+            link.className = "rss-title";
+            link.href = safeTelegramLink(item.url);
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+
+            link.textContent =
+                item.title || "View post on Telegram";
+
+            card.appendChild(link);
+
+            const formattedDate =
+                formatDate(item.date_published);
+
+            if (formattedDate) {
+                const date = document.createElement("time");
+
+                date.className = "rss-date";
+                date.dateTime = item.date_published;
+                date.textContent = formattedDate;
+
+                card.appendChild(date);
+            }
+
+            if (item.content_text) {
+                const content = document.createElement("div");
+
+                content.className = "rss-content";
+                content.textContent = item.content_text;
+
+                card.appendChild(content);
+            }
+
+            return card;
+        }
+
+
+        // Load the locally stored news feed
+
+        async function loadNewsFeed() {
+            if (refreshButton.disabled) {
                 return;
             }
 
-            // Iterate over items and build the HTML output
-            items.slice(0, MAX_ITEMS).forEach(item => {
-                const title = item.title || "No Title";
-                const link = item.url || "#";
-                // Prioritize content_html as it often contains rich media/text
-                const contentHtml = item.content_html || item.content || item.description || "";
-                
-                // Use date_modified or date_published for timestamp
-                const dateSource = item.date_modified || item.date_published;
-                
-                // Format the date for English localization
-                const dateOptions = {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false // Use 24-hour format
-                };
-                const date = dateSource 
-                    ? new Date(dateSource).toLocaleString('en-US', dateOptions) 
-                    : "";
+            refreshButton.disabled = true;
+            refreshButton.textContent = "Refreshing...";
 
-                // Strip HTML tags from content to display as plain text summary
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = contentHtml;
-                const plainText = tempDiv.textContent || tempDiv.innerText || "";
-                
-                const html = `
-                    <div class="rss-item">
-                        <a class="rss-title" href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
-                        ${date ? `<span class="rss-date">${date}</span>` : ''}
-                        ${plainText ? `<div class="rss-content">${plainText.trim()}</div>` : ''}
-                    </div>
-                `;
-                feedContainer.innerHTML += html;
-            });
+            newsStatus.textContent = "";
 
-        } catch (err) {
-            feedContainer.innerHTML = `<div class="error">⚠️ Failed to load news. Check feed URL or proxy status. Error: ${err.message}</div>`;
+            const hasExistingNews =
+                feedContainer.querySelector(".rss-item") !== null;
+
+            if (!hasExistingNews) {
+                showMessage("Loading news...", "loading");
+            }
+
+            const controller = new AbortController();
+
+            const timeout = setTimeout(
+                () => controller.abort(),
+                15000
+            );
+
+            try {
+                const response = await fetch(FEED_URL, {
+                    cache: "no-store",
+                    signal: controller.signal
+                });
+
+                if (!response.ok) {
+                    throw new Error(
+                        "HTTP " + response.status
+                    );
+                }
+
+                const data = await response.json();
+
+                if (!Array.isArray(data.items)) {
+                    throw new Error("Invalid news feed");
+                }
+
+                const items = data.items
+                    .filter(
+                        item => item &&
+                        typeof item === "object"
+                    )
+                    .slice(0, MAX_ITEMS);
+
+                if (items.length === 0) {
+                    if (!hasExistingNews) {
+                        showMessage(
+                            "No news available yet. Please visit our Telegram channel.",
+                            "loading"
+                        );
+                    } else {
+                        newsStatus.textContent =
+                            "Showing previously loaded news.";
+                    }
+
+                    return;
+                }
+
+                const fragment =
+                    document.createDocumentFragment();
+
+                for (const item of items) {
+                    fragment.appendChild(
+                        createNewsCard(item)
+                    );
+                }
+
+                feedContainer.replaceChildren(fragment);
+
+            } catch (error) {
+                console.error(
+                    "News loading failed:",
+                    error
+                );
+
+                if (hasExistingNews) {
+                    newsStatus.textContent =
+                        "Refresh failed. Showing previously loaded news.";
+                } else {
+                    showMessage(
+                        "News temporarily unavailable. Please visit our Telegram channel.",
+                        "error"
+                    );
+                }
+
+            } finally {
+                clearTimeout(timeout);
+
+                refreshButton.disabled = false;
+                refreshButton.textContent = "🔄 Refresh News";
+            }
         }
-    }
 
-    // Load the feed when the page initializes
-    loadNewsFeed();
-</script>
+
+        // Refresh button
+
+        refreshButton.addEventListener(
+            "click",
+            loadNewsFeed
+        );
+
+
+        // Load news when the page opens
+
+        loadNewsFeed();
+
+    </script>
 
 </body>
 </html>
